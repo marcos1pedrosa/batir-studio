@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ← ALTERADO AQUI: remova a linha abaixo quando a versão final subir -->
+  <meta name="robots" content="noindex">
+  <title>Bâtir Studio — Conteúdo e presença digital para marcas locais</title>
+  <meta name="description"
+    content="Estúdio de conteúdo, fotografia e marketing digital para bares, restaurantes e negócios locais no Rio de Janeiro.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #182620;
+      --ink-soft: #22342b;
+      --cream: #F6F1E4;
+      --cream-dim: #EAE3D0;
+      --gold: #C98A2B;
+      --gold-soft: #E0AE5C;
+      --charcoal: #22231F;
+      --sage: #8A9A82;
+      --line: rgba(246, 241, 228, 0.18);
+      --line-dark: rgba(34, 35, 31, 0.14);
+      --radius: 2px;
+      --maxw: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    section {
+      position: relative;
+    }
+
+    /* ---- Corner marks (signature element) ---- */
+    .corners {
+      position: absolute;
+      inset: 18px;
+      pointer-events: none;
+    }
+
+    .corners::before,
+    .corners::after,
+    .corners .c3,
+    .corners .c4 {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+    }
+
+    .corners::before {
+      top: 0;
+      left: 0;
+      border-top: 1px solid currentColor;
+      border-left: 1px solid currentColor;
+    }
+
+    .corners::after {
+      top: 0;
+      right: 0;
+      border-top: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+    }
+
+    .corners .c3 {
+      bottom: 0;
+      left: 0;
+      border-bottom: 1px solid currentColor;
+      border-left: 1px solid currentColor;
+    }
+
+    .corners .c4 {
+      bottom: 0;
+      right: 0;
+      border-bottom: 1px solid currentColor;
+      border-right: 1px solid currentColor;
+    }
+
+    /* ---- Nav ---- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(24, 38, 32, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .logo {
+      color: var(--cream);
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .logo em {
+      color: var(--gold-soft);
+      font-style: normal;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .navlinks a {
+      color: var(--cream-dim);
+      font-size: 14px;
+      transition: color .2s;
+    }
+
+    .navlinks a:hover {
+      color: var(--gold-soft);
+    }
+
+    .navlinks .cta {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius);
+    }
+
+    .navlinks .cta:hover {
+      background: var(--gold-soft);
+    }
+
+    .burger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--cream);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 170px 0 100px;
+      color-scheme: dark;
+    }
+
+    .hero .corners {
+      color: rgba(246, 241, 228, 0.35);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--gold-soft);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--gold-soft);
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.2vw, 64px);
+      line-height: 1.06;
+      max-width: 720px;
+    }
+
+    .hero h1 i {
+      font-style: italic;
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    .hero p.lead {
+      margin-top: 26px;
+      font-size: 17px;
+      color: var(--cream-dim);
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      margin-top: 38px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      transition: all .2s;
+      border: 1px solid transparent;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-soft);
+    }
+
+    .btn-outline {
+      border-color: var(--line);
+      color: var(--cream);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold-soft);
+      color: var(--gold-soft);
+    }
+
+    .hero-coords {
+      justify-self: end;
+      text-align: right;
+      color: var(--sage);
+      border-left: 1px solid var(--line);
+      padding-left: 24px;
+    }
+
+    .hero-coords .mono {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ---- Section shell ---- */
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+
+    .section-head .mono {
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 3.4vw, 42px);
+    }
+
+    .section-head p {
+      margin-top: 16px;
+      color: #4a4a44;
+      font-size: 16px;
+    }
+
+    /* ---- Sobre ---- */
+    .about {
+      background: var(--cream);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 16.5px;
+      color: #3c3c37;
+      margin-bottom: 18px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line-dark);
+      border: 1px solid var(--line-dark);
+      margin-top: 8px;
+    }
+
+    .stat {
+      background: var(--cream);
+      padding: 22px;
+      position: relative;
+    }
+
+    .stat b {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      display: block;
+      color: var(--ink);
+    }
+
+    .stat span {
+      font-size: 12.5px;
+      color: #6b6b63;
+    }
+
+    /* ---- Serviços ---- */
+    .services {
+      background: var(--ink-soft);
+      color: var(--cream);
+    }
+
+    .services .section-head p {
+      color: var(--cream-dim);
+    }
+
+    .services .section-head .mono {
+      color: var(--gold-soft);
+    }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .svc {
+      background: var(--ink-soft);
+      padding: 32px 28px;
+    }
+
+    .svc .mono {
+      color: var(--gold-soft);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .svc h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--cream);
+    }
+
+    .svc p {
+      font-size: 14.5px;
+      color: var(--cream-dim);
+    }
+
+    /* ---- Portfólio ---- */
+    .portfolio {
+      background: var(--cream);
+    }
+
+    .pf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pf-card {
+      position: relative;
+      border: 1px solid var(--line-dark);
+      padding: 20px;
+      background: #fff;
+    }
+
+    .pf-card .corners {
+      color: rgba(34, 35, 31, 0.25);
+      inset: 10px;
+    }
+
+    .pf-photo {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #3a4a3d, #22342b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .pf-photo span {
+      color: var(--sage);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pf-card h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .pf-card .mono {
+      color: var(--gold);
+      font-size: 11px;
+    }
+
+    /* ---- Planos ---- */
+    .plans {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    .plans .section-head p {
+      color: var(--cream-dim);
+    }
+
+    .plans .section-head .mono {
+      color: var(--gold-soft);
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .plan {
+      border: 1px solid var(--line);
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan.featured {
+      border-color: var(--gold);
+      background: rgba(201, 138, 43, 0.07);
+    }
+
+    .plan .mono {
+      color: var(--gold-soft);
+      margin-bottom: 14px;
+    }
+
+    .plan h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .plan .price {
+      font-family: 'Fraunces', serif;
+      font-size: 34px;
+      margin: 14px 0 20px;
+      color: var(--gold-soft);
+    }
+
+    .plan .price span {
+      font-size: 13px;
+      color: var(--sage);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .plan ul {
+      list-style: none;
+      margin-bottom: 28px;
+      flex-grow: 1;
+    }
+
+    .plan li {
+      font-size: 14px;
+      color: var(--cream-dim);
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .plan li::before {
+      content: "— ";
+      color: var(--gold-soft);
+    }
+
+    /* ---- Contato ---- */
+    .contact {
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 70px;
+    }
+
+    .contact-info p {
+      color: #4a4a44;
+      font-size: 15.5px;
+      margin-bottom: 24px;
+    }
+
+    .wa-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1e2b23;
+      color: var(--cream);
+      padding: 14px 22px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: var(--radius);
+    }
+
+    .wa-button:hover {
+      background: var(--ink);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    form label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6b6b63;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    form input,
+    form textarea,
+    form select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line-dark);
+      padding: 10px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--charcoal);
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    form button {
+      margin-top: 10px;
+      align-self: flex-start;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 14px 30px;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .form-note {
+      font-size: 12.5px;
+      color: #8a8a80;
+      margin-top: 4px;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      background: var(--ink);
+      color: var(--sage);
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    footer .logo {
+      color: var(--cream);
+    }
+
+    @media(max-width:860px) {
+      .navlinks {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--ink);
+        flex-direction: column;
+        padding: 20px 28px;
+        gap: 20px;
+        border-bottom: 1px solid var(--line);
+        display: none;
+      }
+
+      .navlinks.open {
+        display: flex;
+      }
+
+      .burger {
+        display: block;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-coords {
+        justify-self: start;
+        text-align: left;
+        border-left: none;
+        padding-left: 0;
+      }
+
+      .svc-grid,
+      .pf-grid,
+      .plan-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .hero {
+        padding: 140px 0 70px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="#top" class="logo">Bâtir <em>Studio</em></a>
+      <div class="navlinks" id="navlinks">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <!-- ← ALTERADO AQUI -->
+        <!-- <a href="#portfolio">Portfólio</a> -->
+        <a href="#planos">Planos</a>
+        <a href="#contato" class="cta">Contato</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Abrir menu">☰</button>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="corners"><i class="c3"></i><i class="c4"></i></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow mono">Estúdio de conteúdo · Rio de Janeiro</div>
+        <h1>Toda marca tem uma base pra <i>construir</i>.</h1>
+        <p class="lead">Fotografia, vídeo e gestão de redes sociais para bares, restaurantes e negócios locais que
+          querem presença digital consistente — sem depender de fazer tudo sozinhos.</p>
+        <div class="hero-actions">
+          <a href="#planos" class="btn btn-gold">Ver planos</a>
+          <!-- ← ALTERADO AQUI -->
+          <!-- <a href="#portfolio" class="btn btn-outline">Ver portfólio</a> -->
+        </div>
+      </div>
+      <div class="hero-coords">
+        <span class="mono">22.9068° S</span>
+        <span class="mono">43.1729° W</span>
+        <span class="mono">Rio de Janeiro, BR</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="about section" id="sobre">
+    <div class="wrap about-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:0;">
+          <span class="mono">Quem somos</span>
+          <h2>Produção e tecnologia, na mesma casa.</h2>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>Somos um estúdio com anos de experiência prática cuidando de conteúdo, fotografia e redes sociais para
+          negócios locais — visitas periódicas, edição, calendário de posts, tudo o que uma marca precisa pra aparecer
+          bem no digital. Unimos isso a processos organizados e apoio de tecnologia, para que cada entrega saia no prazo
+          e com qualidade.</p>
+        <p>O resultado é um atendimento próximo e pessoal, com o nível de estrutura de uma agência maior — sem perder o
+          cuidado artesanal de quem fotografa cada cliente de verdade.</p>
+        <div class="about-stats">
+          <div class="stat"><b>3</b><span>Marcas atendidas atualmente</span></div>
+          <div class="stat"><b>15</b><span>Dias — ciclo de produção de conteúdo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services section" id="servicos">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">O que fazemos</span>
+        <h2>Serviços</h2>
+        <p>Cada marca recebe um plano de conteúdo pensado pro seu ritmo — não um pacote genérico.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <span class="mono">01</span>
+          <h3>Fotografia &amp; vídeo</h3>
+          <p>Visitas presenciais periódicas para registrar produtos, ambiente e rotina do negócio, com edição
+            profissional de foto e vídeo.</p>
+        </div>
+        <div class="svc">
+          <span class="mono">02</span>
+          <h3>Gestão de redes sociais</h3>
+          <p>Calendário de posts, legendas, agendamento e acompanhamento de métricas — sem a marca precisar pensar nisso
+            no dia a dia.</p>
+        </div>
+        <div class="svc">
+          <span class="mono">03</span>
+          <h3>Estratégia &amp; automação</h3>
+          <p>Organização de processos, propostas e fluxo de atendimento com apoio de tecnologia, para crescer sem perder
+            qualidade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ← ALTERADO AQUI: seção oculta até ter fotos reais -->
+  <!--
+  <section class="portfolio section" id="portfolio">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">Trabalhos</span>
+        <h2>Portfólio</h2>
+        <p>Substitua os cartões abaixo pelas fotos reais dos clientes assim que estiverem prontas.</p>
+      </div>
+      <div class="pf-grid">
+        <div class="pf-card">
+          <div class="corners"><i class="c3"></i><i class="c4"></i></div>
+          <div class="pf-photo"><span>Foto do cliente 01</span></div>
+          <h3>Nome do Cliente</h3>
+          <span class="mono">Gastronomia · Rio de Janeiro</span>
+        </div>
+        <div class="pf-card">
+          <div class="corners"><i class="c3"></i><i class="c4"></i></div>
+          <div class="pf-photo"><span>Foto do cliente 02</span></div>
+          <h3>Nome do Cliente</h3>
+          <span class="mono">Gastronomia · Rio de Janeiro</span>
+        </div>
+        <div class="pf-card">
+          <div class="corners"><i class="c3"></i><i class="c4"></i></div>
+          <div class="pf-photo"><span>Foto do cliente 03</span></div>
+          <h3>Nome do Cliente</h3>
+          <span class="mono">Gastronomia · Rio de Janeiro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section class="plans section" id="planos">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">Investimento</span>
+        <h2>Planos</h2>
+        <!-- ← ALTERADO AQUI: frase de instrução removida -->
+      </div>
+      <div class="plan-grid">
+        <div class="plan">
+          <span class="mono">Essencial</span>
+          <h3>Para começar</h3>
+          <div class="price">R$ 300<span>/mês</span></div>
+          <ul>
+            <li>1 visita de fotos por mês</li>
+            <li>8 posts agendados</li>
+            <li>Publicações a cada 3 dias</li>
+            <li>Legendas e hashtags</li>
+          </ul>
+          <a href="#contato" class="btn btn-outline">Escolher plano</a>
+        </div>
+        <div class="plan featured">
+          <span class="mono">Studio</span>
+          <h3>Mais popular</h3>
+          <div class="price">R$ 700<span>/mês</span></div>
+          <ul>
+            <li>2 visitas de fotos/vídeo por mês</li>
+            <li>16 posts agendados</li>
+            <li>Reels e edição de vídeo</li>
+            <li>Relatório mensal de métricas</li>
+          </ul>
+          <a href="#contato" class="btn btn-gold">Escolher plano</a>
+        </div>
+        <div class="plan">
+          <span class="mono">Signature</span>
+          <h3>Sob medida</h3>
+          <div class="price">Consulte</div>
+          <ul>
+            <li>Visitas quinzenais</li>
+            <li>Conteúdo ilimitado</li>
+            <li>Gestão de anúncios</li>
+            <li>Atendimento prioritário</li>
+          </ul>
+          <a href="#contato" class="btn btn-outline">Falar com a gente</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact section" id="contato">
+    <div class="wrap contact-grid" style="grid-template-columns:1fr;"> <!-- ← ALTERADO AQUI -->
+      <div class="contact-info">
+        <div class="section-head" style="margin-bottom:24px;">
+          <span class="mono">Vamos conversar</span>
+          <h2>Contato</h2>
+        </div>
+        <p>Conte um pouco sobre o seu negócio e o que você precisa. Respondemos em até 1 dia útil.</p>
+        <a href="https://wa.me/5521973499242?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20planos%20da%20B%C3%A2tir%20Studio."
+          class="wa-button" target="_blank" rel="noopener">
+          ↗ Falar no WhatsApp
+        </a>
+        <!-- ← ALTERADO AQUI: formulário oculto até conectar ao n8n -->
+        <!--
+        <form id="contactForm">
+          <div>
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" required>
+          </div>
+          <div>
+            <label for="negocio">Nome do negócio</label>
+            <input type="text" id="negocio">
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" required>
+          </div>
+          <div>
+            <label for="plano">Plano de interesse</label>
+            <select id="plano">
+              <option>Essencial</option>
+              <option>Studio</option>
+              <option>Signature</option>
+              <option>Ainda não sei</option>
+            </select>
+          </div>
+          <div>
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem"></textarea>
+          </div>
+          <button type="submit">Enviar mensagem</button>
+          <p class="form-note">Este formulário ainda não está conectado a um e-mail — isso entra na Fase 3 (automação).
+            Por enquanto, o botão de WhatsApp acima é o canal ativo.</p>
+        </form>
+        -->
+      </div>
+    </div> <!-- ← ALTERADO AQUI: este </div> estava faltando (fecha o contact-grid) -->
+  </section>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <a href="#top" class="logo">Bâtir Studio</a>
+      <span class="mono">© 2026 · Rio de Janeiro, Brasil</span>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navlinks = document.getElementById('navlinks');
+    burger.addEventListener('click', () => navlinks.classList.toggle('open'));
+    navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+
+    /* ALTERADO AQUI: formulário oculto, script desativado
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Formulário em modo de demonstração. Configure o envio de verdade na Fase 3 (automação) ou use o botão de WhatsApp por enquanto.');
+    });
+    */
+  </script>
+
+</body>
+
+</html>
